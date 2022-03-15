@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//route raggiungibile da tutti 
+//Route::get('/home', 'HomeController@index')->name('home');
+
+//tutte le rotte qui sono raggiungibili  solo se l'utente è loggato
+Route::middleware('auth')
+    ->namespace('Admin') //namespace Admin dice che tutte le rotte vanno prese nel controller nella cartella Admin
+    ->name('admin.') //tutte le rotte avranno all inizio admin.
+    ->prefix('admin') //relativo a tutto le rotte (prefisso della url)
+    ->group(function(){
+        Route::get('/', 'HomeController@index')->name('home');
+        Route::resource('/posts', 'PostController');
+    });
