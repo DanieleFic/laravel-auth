@@ -1,11 +1,36 @@
-@dump($posts)
+@extends('layouts.dashboard')
 
-@foreach ($posts as $elemento)
-    <ul>
-        <li>{{$elemento->title}}</li>
-        <li>{{$elemento->author}}</li>
-        <li>{{$elemento->content}}</li>
-        <li>{{$elemento->published}}</li>
-        <li>{{$elemento->slug}}</li>
+@section('title',' Posts Lists')
+
+@section('content')
+<div class="container">
+    <ul class="responsive-table">
+        <li class="table-header">
+            {{-- <div class="col col-1">id</div> --}}
+            <div class="col col-1">title</div>
+            <div class="col col-2">author</div>
+            <div class="col col-5">content</div>
+            <div class="col col-1">published</div>
+            <div class="col col-1">Slug</div>
+            <div class="col col-1">Modifiche</div>
+        </li>
+        @foreach ($posts as $element)
+            <li class="table-row">
+            <div class="col col-1" data-label="Job Id">
+                {{$element->title}}
+            </div>
+            <div class="col col-2">{{$element->author}}</div>
+            <div class="col col-5">{{$element->content}}</div>
+            <div class="col col-1">{{$element->published}}</div>
+            <div class="col col-1">{{$element->slug}}</div>
+            <div class="col col-1 ms_flex">
+                <a href="{{route("admin.posts.show", $element->id)}}"><button type="button" class="btn btn_info"><i class="bi bi-info"></i></button></a>
+                <a><button type="button" class="btn  btn_edit"><i class="bi bi-pencil-square"></i></button></a>
+                <a><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></a>
+            </div>
+            </li>
+        @endforeach
     </ul>
-@endforeach
+</div>
+
+@endsection
