@@ -10,3 +10,13 @@
 @import '~bootstrap-icons/font/bootstrap-icons';
 
 @import 'partials/_index';
+
+.ms_container{
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+
+} 
