@@ -55,6 +55,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route("admin.home")}}">
+                                        {{ __('Home') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{route("admin.posts.index")}}">
+                                        {{ __('Lista Post') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
@@ -73,16 +79,6 @@
         </nav>
 
         <main class="py-4">
-
-            <div class="ms_container">
-                <div>
-                    <a href="{{route("admin.home")}}"><i class="bi bi-house-door-fill"></i>Home</a>
-                </div>
-                <div>
-                    <a href="{{route("admin.posts.index")}}"><i class="bi bi-list-ul"></i>Lista Post</a>
-                </div>
-            </div>
-            
             @yield('content')
         </main>
     </div>
