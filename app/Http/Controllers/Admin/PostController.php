@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Str;
 
 
 class PostController extends Controller
@@ -28,9 +30,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Post $post)
     {
-        //
+        return view('admin.posts.create', compact('post'));
     }
 
     /**
@@ -40,8 +42,32 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $request->validate([
+            "title"=>"required|string|max:50",
+            "author"=>"required|string|max:50",
+            "content"=>"required|string|max:4000"
+        ]);
+
+        $form_data = $request->all();
+
+        $slugTmp = Str::slug($form_data['title']);
+
+        $count = 1;
+        
+        while(Post::where('slug',$slugTmp)->first()){
+            $slugTmp = Str::slug($form_data['title']).'-'.$count;
+            $count ++;
+        }
+
+        $form_data['slug'] = $slugTmp;
+
+        $newPost = new Post();
+
+        $newPost->fill($form_data);
+        $newPost->save();
+
+        return redirect()->route('admin.posts.show', $newPost->id);
     }
 
     /**

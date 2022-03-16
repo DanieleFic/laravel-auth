@@ -11,8 +11,6 @@
         <p>{{$post->author}}</p>
         <h2>Testo</h3>
         <p>{{$post->content}}</p>
-        <h2>published</h3>
-        <p>{{$post->published}}</p>
         <h2>Slug del Post</h3>
         <p>{{$post->slug}}</p>
         {{-- facciamo un bottone con il route comics.show che si trova nel nostro controllore  --}}
