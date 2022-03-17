@@ -26,8 +26,12 @@
             <div class="col col-1">{{$element->slug}}</div>
             <div class="col col-1 ms_flex">
                 <a href="{{route("admin.posts.show", $element->id)}}"><button type="button" class="btn btn_info"><i class="bi bi-info"></i></button></a>
-                <a><button type="button" class="btn  btn_edit"><i class="bi bi-pencil-square"></i></button></a>
-                <a><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></a>
+                <a href="{{route("admin.posts.edit", $element->id)}}"><button type="button" class="btn  btn_edit"><i class="bi bi-pencil-square"></i></button></a>
+                <form action="{{route("admin.posts.destroy", $element->id)}}" method="POST">
+                    @csrf
+                    @method("DELETE")
+                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                </form>
             </div>
             </li>
         @endforeach
